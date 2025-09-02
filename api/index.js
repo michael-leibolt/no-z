@@ -25,3 +25,23 @@ app.get('/units', async (req, res) => {
     res.status(500).send('Error fetching units')
   }
 })
+
+app.get('/vehicles', async (req, res) => {
+  try {
+    let vehicles = await getter('vehicles')
+    res.send(vehicles)
+  } catch (error) {
+    console.error('Error fetching vehicles:', error)
+    res.status(500).send('Error fetching vehicles')
+  }
+})
+
+app.get('/users', async (req, res) => {
+  try {
+    let users = await getter('users')
+    res.send(users)
+  } catch (error) {
+    console.error('Error fetching users:', error)
+    res.status(500).send('Error fetching users')
+  }
+})
