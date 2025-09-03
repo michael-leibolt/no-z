@@ -24,7 +24,7 @@ function App() {
       <>
         <h1>Logged in for UIC:{`${authUser}`}</h1>
         <button onClick={logout}>Log Out</button>
-        <LoggedIn />
+        <LoggedIn uic={authUser}/>
       </>
     )
   }
