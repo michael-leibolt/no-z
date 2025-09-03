@@ -1,6 +1,7 @@
 import '../css/Vic.css'
 import { useState, useEffect } from 'react'
 import VicDetails from './VicDetails'
+import Docs from './Docs'
 
 function Vic({ vic }){
   const [ primeStatus, setPrimeStatus ] = useState(vic.prime_status)
@@ -9,6 +10,7 @@ function Vic({ vic }){
   const [ crewStatus, setCrewStatus ] = useState(vic.crew_status)
   const [ nightStatus, setNightStatus ] = useState(vic.night_status)
   const [isVisible, setIsVisible] = useState(false);
+  const [ docs, setDocs ] = useState(false)
 
   return(
     <>
@@ -16,7 +18,7 @@ function Vic({ vic }){
         {isVisible ? 'Hide' : 'Show'} Vehicle Update Form
       </button>
       <div className='vicCard'>
-        {
+        <button onClick={() =>setDocs(!docs)}>{
           vic.nomenclature == 'M1 Abrams' ?
             <img
               src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Abrams-transparent.png/250px-Abrams-transparent.png'
@@ -52,7 +54,10 @@ function Vic({ vic }){
                 width = '165px'
               />
             : <img src='https://www.svgrepo.com/show/407321/red-question-mark.svg' height='75px' width='auto'/>
-        }
+        }<p>Documentation</p></button>
+        {docs && (
+          <Docs type={vic.nomenclature}/>
+        )}
         <p>
           Bumper #:
           {vic.bumper_num}
@@ -66,24 +71,19 @@ function Vic({ vic }){
           {vic.serial}
         </p>
         <p style={{ backgroundColor: primeStatus == 1 ? 'green' : 'red', color: 'white', padding: '8px' }}>
-          Overall :
-          {primeStatus}
+          Overall
         </p>
         <p style={{ backgroundColor: weaponsStatus == 1 ? 'green' : 'red', color: 'white', padding: '8px' }}>
-          Weapon :
-          {weaponsStatus}
+          Weapon
         </p>
         <p style={{ backgroundColor: commsStatus == 1 ? 'green' : 'red', color: 'white', padding: '8px' }}>
-          Comms :
-          {commsStatus}
+          Comms
         </p>
         <p style={{ backgroundColor: crewStatus == 6 ? 'green' : crewStatus >= 4 ? 'yellow' : 'red', color: 'white', padding: '8px' }}>
-          Crew :
-          {crewStatus}
+          Crew
         </p>
         <p style={{ backgroundColor: nightStatus == 1 ? 'green' : 'red', color: 'white', padding: '8px' }}>
-          Night :
-          {nightStatus}
+          Night
         </p>
       </div>
       {isVisible && (
