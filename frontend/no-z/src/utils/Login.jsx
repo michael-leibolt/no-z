@@ -30,7 +30,6 @@ function Login({ setAuthUser, authUser }){
         }
         let data = await res.json()
         setAuthUser(data.uic)
-        console.log(data)
       }
       catch (err) {
         console.error("Failed to fetch match in login:", err);
