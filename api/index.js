@@ -3,7 +3,7 @@ const { getter } = require('./utils.js')
 
 const express = require('express')
 const cors = require('cors')
-//const knex = require('knex')( require('./knexfile')[process.env.NODE_ENV])
+const knex = require('knex')( require('./knexfile')[process.env.NODE_ENV])
 const app = express()
 const port = process.env.EXPRESS_PORT
 
@@ -33,6 +33,25 @@ app.get('/vehicles', async (req, res) => {
   } catch (error) {
     console.error('Error fetching vehicles:', error)
     res.status(500).send('Error fetching vehicles')
+  }
+})
+
+app.patch('/vehicles', async (req, res) => {
+  let { id, overall, weapon, comms, crew, night } = req.body
+  let updates = {prime_status: overall, weapons_status: weapon, comms_status: comms, crew_status: crew, night_status: night}
+  try {
+    const updatedItem = await knex('vehicles')
+    .where({id: id})
+    .update(updates, ['*'])
+
+    if(updatedItem && updatedItem.length > 0){
+      res.status(201).send(updatedItem)
+    } else {
+      res.status(404).send(`Request to update ${id} incomplete`)
+    }
+  } catch (error) {
+    console.error('Error fetching units:', error)
+    res.status(500).send('Error fetching units')
   }
 })
 
