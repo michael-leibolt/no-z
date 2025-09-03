@@ -1,0 +1,31 @@
+.vicCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.vicCard p {
+  flex: 1; /* Makes each paragraph take equal width */
+  margin: 0; /* Removes default paragraph margins */
+  color: 'white';
+  padding: '8px 12px';
+  border-radius: '4px';
+  margin: '4px';
+  text-align: 'center'
+}
+
+.status-fmc {
+  color: white;
+  background-color: green;
+}
+
+.status-inop {
+  color: white;
+  background-color: red;
+}
+
+.status_slash {
+  color: white;
+  background-color: yellow;
+}

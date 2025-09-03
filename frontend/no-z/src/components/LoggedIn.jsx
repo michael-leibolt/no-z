@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
 
+import Unit from './Unit.jsx'
+
 function LoggedIn({ uic }){
   const [ subUnits, setSubUnits ] = useState(null)
+  const [ allUnits, setAllUnits ] = useState(null)
   const [ unit, setUnit ] = useState(null)
   const [ vics, setVics ] = useState(null)
   const [ allVics, setAllVics] = useState(null)
@@ -15,6 +18,7 @@ function LoggedIn({ uic }){
     fetch(`${import.meta.env.VITE_API_BASE_URL}/units`)
     .then(res => res.json())
     .then(units => {
+      setAllUnits(units)
       let data
       for(let i = 0; i < units.length; i++){
         if(units[i].uic == uic){
@@ -56,16 +60,52 @@ function LoggedIn({ uic }){
   useEffect(() => {
     if(subUnits !== null && allVics !== null){
       let toFetch = subUnits.split(',')
-      console.log(allVics)
-
+      for(let j = 0; j < toFetch.length; j++) {
+        for(let i = 0; i < allUnits.length; i++){
+          if(toFetch[j] == allUnits[i].id && toFetch[j] == 1){
+            setSubUnit1(allUnits[i].uic)
+          }
+          if(toFetch[j] == allUnits[i].id && toFetch[j] == 2){
+            setSubUnit2(allUnits[i].uic)
+          }
+          if(toFetch[j] == allUnits[i].id && toFetch[j] == 3){
+            setSubUnit3(allUnits[i].uic)
+          }
+          if(toFetch[j] == allUnits[i].id && toFetch[j] == 4){
+            setSubUnit4(allUnits[i].uic)
+          }
+        }
+      }
     }
   }, [subUnits, allVics])
 
-  return(
-    <>
-      <h1>Success</h1>
-    </>
-  )
+  if(!allUnits || !unit || !vics || !allVics) {
+    return (
+      <>
+        <h1>Loading Data...</h1>
+      </>
+    )
+  } else {
+    return(
+      <>
+        <Unit vics={vics} unit={unit}/>
+
+        {
+          subUnit1 !== null ? <Unit key={subUnit1} uic={subUnit1} allVics={allVics} /> : <></>
+        }
+        {
+          subUnit2 !== null ? <Unit key={subUnit2} uic={subUnit2} allVics={allVics} /> : <></>
+        }
+        {
+          subUnit3 !== null ? <Unit key={subUnit3} uic={subUnit3} allVics={allVics} /> : <></>
+        }
+        {
+          subUnit4 !== null ? <Unit key={subUnit4} uic={subUnit4} allVics={allVics} /> : <></>
+        }
+      </>
+    )
+  }
 }
 
 export default LoggedIn;
+
