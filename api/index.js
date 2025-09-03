@@ -36,10 +36,22 @@ app.get('/vehicles', async (req, res) => {
   }
 })
 
-app.get('/users', async (req, res) => {
+app.patch('/users', async (req, res) => {
   try {
+    let username = req.body.username
+    let password = req.body.password
     let users = await getter('users')
-    res.send(users)
+
+    let foundUser = users.find(user => user.username === username)
+
+    if (!foundUser) {
+      return res.status(401).send(`User at username ${username} is not found. Register a new user or try again`)
+    }
+    if (foundUser.password === password) {
+      return res.status(200).send({uic: foundUser.uic})
+    } else {
+      return res.status(401).send(`Password for ${username} is incorrect`)
+    }
   } catch (error) {
     console.error('Error fetching users:', error)
     res.status(500).send('Error fetching users')

@@ -10,7 +10,6 @@ exports.seed = function(knex) {
   .then(one => {
     return knex('units').select('uic').from('units')
       .then(output => {
-
         let bnUic = output[0]
         let oneUic = output[1]
         let twoUic = output[2]
