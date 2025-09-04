@@ -76,8 +76,6 @@ exports.seed = function(knex) {
             }
             for(let i = 0; i < faked; i++) {
               let vehicle
-              console.log(n)
-              console.log(bumper)
               let place = order
               order++
               let num
@@ -95,11 +93,11 @@ exports.seed = function(knex) {
               } else {
                 vehicle = "M149A2 Buffalo"
               }
-              if(i <= 4){
+              if(i <= 3){
                 num = 1
-              } else if(i <=8){
+              } else if(i <=7){
                 num = 2
-              } else if(i <=12 ){
+              } else if(i <=11 ){
                 num = 3
               } else {
                 num = 0
@@ -109,7 +107,7 @@ exports.seed = function(knex) {
               data.push({
                 id: place,
                 serial: faker.commerce.isbn(),
-                bumper_num: `${bumper}${faker.string.alphanumeric({length: {min: 2, max: 3}})}`,
+                bumper_num: `${bumper}-${faker.string.alphanumeric({length: {min: 2, max: 3}})}`,
                 nomenclature: vehicle,
                 platoon: num,
                 prime_status: prime,

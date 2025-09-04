@@ -29,7 +29,7 @@ function Login({ setAuthUser, authUser }){
           throw new Error(`Server Error! Status ${res.status}`)
         }
         let data = await res.json()
-        setAuthUser(data.uic)
+        setAuthUser(data)
       }
       catch (err) {
         console.error("Failed to fetch match in login:", err);
