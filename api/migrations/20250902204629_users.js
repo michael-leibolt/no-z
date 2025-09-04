@@ -8,6 +8,7 @@ exports.up = function(knex) {
     table.string('username')
     table.string('password')
     table.string('uic')
+    table.string('platoon')
   })
 };
 

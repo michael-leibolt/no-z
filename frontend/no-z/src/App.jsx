@@ -22,9 +22,9 @@ function App() {
   } else {
     return (
       <>
-        <h1>Logged in for UIC:{`${authUser}`}</h1>
+        <h1>Logged in for UIC:{`${authUser.uic}`}</h1>
         <button onClick={logout}>Log Out</button>
-        <LoggedIn uic={authUser}/>
+        <LoggedIn uic={authUser.uic} platoon={authUser.platoon}/>
       </>
     )
   }

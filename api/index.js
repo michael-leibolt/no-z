@@ -67,7 +67,7 @@ app.patch('/users', async (req, res) => {
       return res.status(401).send(`User at username ${username} is not found. Register a new user or try again`)
     }
     if (foundUser.password === password) {
-      return res.status(200).send({uic: foundUser.uic})
+      return res.status(200).send({uic: foundUser.uic, platoon: foundUser.platoon})
     } else {
       return res.status(401).send(`Password for ${username} is incorrect`)
     }
